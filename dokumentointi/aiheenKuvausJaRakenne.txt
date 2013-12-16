@@ -1,0 +1,9 @@
+Aihe: Breakout pelin klooni
+
+Toteutetaan peli, joka vastaa perustoiminnoltaan vanhaa perinteistä breakout peliä.
+Pelissä on tarkoitus alus "lautaa" liikuttelemalla tuhota kaikki palikat peli-ikkunan ylälaidasta.
+Erivärisistä palikoista saa eri verran pisteitä ja pelissä on 3kpl elämiä.
+Alus "lautaa" liikutetaan nuolinäppäimillä sivuille, pallo kimpoaa eri tavalla riippuen siitä mihin kohtaa lautaa pallo osuu.
+
+
+kaikkien käyttäjien toiminnot: pelaa peliä, katso high-scoret, syötä pelaajan nimi
