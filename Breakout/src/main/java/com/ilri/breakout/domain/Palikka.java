@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ilri.breakout.game;
+package com.ilri.breakout.domain;
 
 /**
  *
  * @author Ilari Richardt
  */
-public class Palikka {
+public class Palikka implements Sijaitsee {
     
     private Piste sijainti;
     private int pisteet;
@@ -17,5 +17,9 @@ public class Palikka {
         this.sijainti = sijainti;
         this.pisteet = pisteet;
         
+    }
+    
+    public Piste getSijainti(){
+        return this.sijainti;
     }
 }

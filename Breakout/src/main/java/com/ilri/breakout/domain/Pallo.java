@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ilri.breakout.game;
+package com.ilri.breakout.domain;
 
 /**
  *
  * @author Ilari Richardt
  */
-public class Pallo implements Siirrettava{
+public class Pallo implements Siirrettava, Sijaitsee{
     private double suunta;              // radiaania pisteesta (1,0)
     private double nopeus;              // sijaintia
     private Piste sijainti;
@@ -30,8 +30,9 @@ public class Pallo implements Siirrettava{
     public void siirra(){
         double dx = Math.sin(suunta) * nopeus + yx;
         double dy = Math.cos(suunta) * nopeus + yy;
-        yx = dx % 1.0;
-        yy = dx % 1.0;
+        yx += (dx)- (long)(dx+yx);
+        yy += (dy)- (long)(dy+yy);
+
         this.siirra((int)dx,(int)dy);
     }
     

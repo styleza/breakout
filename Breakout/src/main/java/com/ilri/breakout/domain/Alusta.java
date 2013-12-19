@@ -2,14 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ilri.breakout.game;
+package com.ilri.breakout.domain;
 
 /**
  *
  * @author Ilari Richardt
  */
-public class Alusta implements Siirrettava{
-    static int ALUSTAN_LEVEYS = 10;
+public class Alusta implements Siirrettava, Sijaitsee {
+    public static int ALUSTAN_LEVEYS = 10;
     private Piste sijainti;
     private int leveys;
     
