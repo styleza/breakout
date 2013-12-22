@@ -4,6 +4,7 @@
  */
 package com.ilri.breakout.game;
 
+import com.ilri.breakout.domain.Piste;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
