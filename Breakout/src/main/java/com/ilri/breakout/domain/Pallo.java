@@ -4,6 +4,8 @@
  */
 package com.ilri.breakout.domain;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Ilari Richardt
@@ -54,6 +56,14 @@ public class Pallo implements Siirrettava, Sijaitsee{
     
     public void setNopeus(double nopeus){
         this.nopeus = nopeus;
+    }
+    public void testaaTormaukset(ArrayList<Palikka> A, Siirrettava B){
+        if(this.sijainti.getY() <= 0){
+            this.tormaa();
+        }
+    }
+    public void tormaa(){
+        this.setSuunta(0);
     }
     
 }

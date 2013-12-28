@@ -62,6 +62,7 @@ public class Kartta {
     }
     
     public void toimi(){
+        this.pallo.testaaTormaukset(this.palikat,this.alusta);
         this.pallo.siirra();
     }
 }
