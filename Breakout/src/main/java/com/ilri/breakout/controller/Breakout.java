@@ -14,7 +14,7 @@ import java.util.Random;
 import javax.swing.Timer;
 
 /**
- *
+ * Pelin ohjain
  * @author Ilari
  */
 public class Breakout extends Timer implements ActionListener {
@@ -24,6 +24,9 @@ public class Breakout extends Timer implements ActionListener {
     private boolean jatkuu;
     private int leveys, korkeus;
     
+    /**
+     * Luo breakout peli
+     */
     public Breakout(){
         super(1000,null);
         
@@ -42,7 +45,10 @@ public class Breakout extends Timer implements ActionListener {
         this.jatkuu = jatkuu;
     }
     
-    
+    /**
+     * Pelin yksi "kellopulssi" pistää kartan toimimaan kerran ja jää odottamaan seuraavaa
+     * @param ae 
+     */
     @Override
     public void actionPerformed(ActionEvent ae) {
         if(!jatkuu){

@@ -6,7 +6,7 @@ package com.ilri.breakout.domain;
 import java.util.ArrayList;
 import java.util.Random;
 /**
- *
+ * Pelilogiikan keskus, tietää Alustan, Palikat, Pallon
  * @author Ilari Richardt
  */
 public class Kartta {
@@ -18,6 +18,11 @@ public class Kartta {
     private int leveys;
     private int korkeus;
     
+    /**
+     * Luo kartta leveydellä ja korkeudella
+     * @param leveys
+     * @param korkeus 
+     */
     public Kartta(int leveys, int korkeus){
         this.ran = new Random();
         // @TODO: luo palikat
@@ -38,6 +43,10 @@ public class Kartta {
         this.korkeus = korkeus;
     }
     
+    /**
+     * Hae kaikkien komponenttien pisteet (Alusta, Palikat, Pallo)
+     * @return 
+     */
     public ArrayList<Piste> getAllPisteet(){
         ArrayList<Piste> rv = new ArrayList<Piste>();
         
@@ -59,10 +68,18 @@ public class Kartta {
         return rv;
     }
     
+    /**
+     * Palauttaa alustan
+     * @return 
+     */
     public Alusta getAlusta(){
         return this.alusta;
     }
     
+    /**
+     * Pelaa peliä yksi "kellopulssi" eteenpäin, siirtää palloa ja testaa törmäykset
+     * @return 
+     */
     public boolean toimi(){
         boolean jatkuu = this.pallo.testaaTormaukset(this.palikat,
                 this.alusta,

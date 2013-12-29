@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- *
+ * Itsestään liikkuva pallo
  * @author Ilari Richardt
  */
 public class Pallo implements Siirrettava, Sijaitsee{
@@ -20,6 +20,13 @@ public class Pallo implements Siirrettava, Sijaitsee{
     boolean pakotaSiirto;
     Random r;
     
+    /**
+     * Luo pallo suunnalla, nopeudella ja sijainnilla
+     * Suunta annetaan radiaaneissa
+     * @param suunta
+     * @param nopeus
+     * @param sijainti 
+     */
     public Pallo(double suunta, double nopeus, Piste sijainti){
         this.suunta = suunta;
         this.nopeus = nopeus;
@@ -29,11 +36,19 @@ public class Pallo implements Siirrettava, Sijaitsee{
         r = new Random();
     }
 
+    /**
+     * Siirtää palloa
+     * @param dx
+     * @param dy 
+     */
     @Override
     public void siirra(int dx, int dy) {
         this.sijainti.siirra(dx, dy);
     }
     
+    /**
+     * Siirtää palloa yhden peliaskeleen verran oikeaan suuntaan oikealla nopeudella
+     */
     public void siirra(){
         double dx = Math.sin(suunta) * (pakotaSiirto ? 2 : nopeus) + yx;
         double dy = Math.cos(suunta) * (pakotaSiirto ? 2 : nopeus) + yy;
@@ -67,7 +82,16 @@ public class Pallo implements Siirrettava, Sijaitsee{
     public void setNopeus(double nopeus){
         this.nopeus = nopeus;
     }
-    public boolean testaaTormaukset(ArrayList<Palikka> A, Alusta B,int width, int height){
+    
+    /**
+     * Testaa törmäykset
+     * @param palikat
+     * @param alusta
+     * @param width
+     * @param height
+     * @return 
+     */
+    public boolean testaaTormaukset(ArrayList<Palikka> palikat, Alusta alusta,int width, int height){
         //Ylälaitatörmäys
         if(this.sijainti.getY() <= 0){
             this.tormaa();
@@ -78,9 +102,9 @@ public class Pallo implements Siirrettava, Sijaitsee{
             return false; // Game over
         }
         // Alustan törmäys
-        if(this.sijainti.getY() == B.getSijainti().getY() &&
-                this.sijainti.getX() >= B.getSijainti().getX() &&
-                this.sijainti.getX() <= (B.getSijainti().getX() + B.getLeveys())){
+        if(this.sijainti.getY() == alusta.getSijainti().getY() &&
+                this.sijainti.getX() >= alusta.getSijainti().getX() &&
+                this.sijainti.getX() <= (alusta.getSijainti().getX() + alusta.getLeveys())){
             this.tormaa();
             pakotaSiirto = true;
         }
@@ -90,6 +114,10 @@ public class Pallo implements Siirrettava, Sijaitsee{
         }
         return true;
     }
+    
+    /**
+     * Törmäyttää pallon (muuttaa suunnan ja arpoo kulmaa)
+     */
     public void tormaa(){
         this.setSuunta(this.suunta+Math.PI+r.nextDouble()*(r.nextBoolean() ? -0.1 : 0.1));
     }

@@ -11,7 +11,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.*;
 /**
- *
+ * Piirtoalusta piirtää pelin kaikki komponentit
  * @author Ilari
  */
 public class Piirtoalusta extends JPanel {
@@ -22,6 +22,10 @@ public class Piirtoalusta extends JPanel {
         this.palikanKoko = palikanKoko;
     }
     
+    /**
+     * Piirrä kaikki pelin komponentit
+     * @param g 
+     */
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);

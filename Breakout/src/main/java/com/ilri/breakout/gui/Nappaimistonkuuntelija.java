@@ -1,20 +1,19 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ilri.breakout.gui;
 
 /**
- *
+ * Luokka joka siirtää alustaa pelissä
  * @author Ilari
  */
-
 import com.ilri.breakout.domain.Alusta;
 import java.awt.event.*;
 public class Nappaimistonkuuntelija implements KeyListener {
     
     private Alusta alusta;
     
+    /**
+     * Luo näppäimistönkuuntelija
+     * @param alusta 
+     */
     public Nappaimistonkuuntelija(Alusta alusta){
         this.alusta = alusta;
     }
@@ -24,6 +23,10 @@ public class Nappaimistonkuuntelija implements KeyListener {
 
     }
 
+    /**
+     * Havaitse napinpainallus
+     * @param e 
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         switch(e.getKeyCode()){

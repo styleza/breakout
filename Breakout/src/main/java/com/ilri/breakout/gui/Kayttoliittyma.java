@@ -12,7 +12,10 @@ import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
- 
+/**
+ * Pelin käyttöliittymä (pelaajalle näkyvä osa)
+ * @author: Ilari Richardt
+*/
 public class Kayttoliittyma implements Runnable {
  
     private JFrame frame;
@@ -26,6 +29,9 @@ public class Kayttoliittyma implements Runnable {
         this.palikanKoko = 5;
     }
  
+    /**
+     * Luo ikkuna ja komponentit
+     */
     @Override
     public void run() {
         frame = new JFrame("Breakout");
@@ -42,6 +48,10 @@ public class Kayttoliittyma implements Runnable {
         frame.setVisible(true);
     }
  
+    /**
+     * Luo komponentit
+     * @param container 
+     */
     public void luoKomponentit(Container container) {
 
         Piirtoalusta pa = new Piirtoalusta(this.peli.getKartta(),this.palikanKoko);

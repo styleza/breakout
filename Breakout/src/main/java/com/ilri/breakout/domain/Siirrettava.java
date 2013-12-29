@@ -5,7 +5,7 @@
 package com.ilri.breakout.domain;
 
 /**
- *
+ * Siirrettävä 
  * @author Ilari Richardt
  */
 public interface Siirrettava {
