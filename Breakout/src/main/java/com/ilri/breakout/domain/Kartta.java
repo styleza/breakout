@@ -68,10 +68,6 @@ public class Kartta {
         return rv;
     }
     
-    /**
-     * Palauttaa alustan
-     * @return 
-     */
     public Alusta getAlusta(){
         return this.alusta;
     }
