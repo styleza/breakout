@@ -32,8 +32,10 @@ public class Kartta {
         Piste pallonSijainti = new Piste(
                 leveys / 2,                                 // X - koordinaatti
                 korkeus - 2);                               // Y - koordinaatti
-        this.pallo = new Pallo(Math.PI, 0.0001, pallonSijainti);
+        this.pallo = new Pallo(Math.PI, 1, pallonSijainti);
         this.palikat = new ArrayList<Palikka>();
+        this.leveys = leveys;
+        this.korkeus = korkeus;
     }
     
     public ArrayList<Piste> getAllPisteet(){
@@ -61,8 +63,15 @@ public class Kartta {
         return this.alusta;
     }
     
-    public void toimi(){
-        this.pallo.testaaTormaukset(this.palikat,this.alusta);
+    public boolean toimi(){
+        boolean jatkuu = this.pallo.testaaTormaukset(this.palikat,
+                this.alusta,
+                this.leveys,
+                this.korkeus);
+        if(!jatkuu){
+            return false;
+        }
         this.pallo.siirra();
+        return true;
     }
 }

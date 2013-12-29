@@ -33,7 +33,7 @@ public class Breakout extends Timer implements ActionListener {
         
         
         addActionListener(this);
-        setInitialDelay(2000);
+        setInitialDelay(20);
         
         jatkuu = true;
         
@@ -48,7 +48,9 @@ public class Breakout extends Timer implements ActionListener {
         if(!jatkuu){
             return;
         }
-        this.kartta.toimi();
+        if(!this.kartta.toimi()){
+           // jatkuu = false;
+        }
         piirtoalusta.repaint();
         super.setDelay(50);
         
