@@ -48,7 +48,7 @@ public class PalloTest {
         pallo.setNopeus(1);
         pallo.setSuunta(Math.PI / 2);
         pallo.siirra();
-        assertEquals(1,this.pallo.getSijainti().getX());
+        assertEquals(2,this.pallo.getSijainti().getX());
         assertEquals(0,this.pallo.getSijainti().getY());
     }
     
@@ -58,7 +58,7 @@ public class PalloTest {
         pallo.setSuunta(0);
         pallo.siirra();
         assertEquals(0,this.pallo.getSijainti().getX());
-        assertEquals(1,this.pallo.getSijainti().getY());
+        assertEquals(2,this.pallo.getSijainti().getY());
     }
     
     @Test
@@ -69,8 +69,8 @@ public class PalloTest {
     
     @Test
     public void testaaAsetaSuunta(){
-        pallo.setSuunta(16.0);
-        assertEquals(16.0, this.pallo.getSuunta(), 0.0);
+        pallo.setSuunta(Math.PI);
+        assertEquals(Math.PI, this.pallo.getSuunta(), 0.0);
     }
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
