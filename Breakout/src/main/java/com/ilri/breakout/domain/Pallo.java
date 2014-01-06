@@ -12,7 +12,8 @@ import java.util.Random;
  * @author Ilari Richardt
  */
 public class Pallo implements Siirrettava, Sijaitsee{
-    private double suunta;              // radiaania pisteesta (1,0)
+    private double suuntaX;              // X liikkuvuus
+    private double suuntaY;              // Y liikkuvuus
     private double nopeus;              // sijaintia
     private Piste sijainti;
     private double yx;
@@ -27,8 +28,9 @@ public class Pallo implements Siirrettava, Sijaitsee{
      * @param nopeus
      * @param sijainti 
      */
-    public Pallo(double suunta, double nopeus, Piste sijainti){
-        this.suunta = suunta;
+    public Pallo(double suuntaX,double suuntaY, double nopeus, Piste sijainti){
+        this.suuntaX = suuntaX;
+        this.suuntaY = suuntaY;
         this.nopeus = nopeus;
         this.sijainti = sijainti;
         yy = yx = 0.0;
@@ -50,8 +52,8 @@ public class Pallo implements Siirrettava, Sijaitsee{
      * Siirtää palloa yhden peliaskeleen verran oikeaan suuntaan oikealla nopeudella
      */
     public void siirra(){
-        double dx = Math.sin(suunta) * (pakotaSiirto ? 2 : nopeus) + yx;
-        double dy = Math.cos(suunta) * (pakotaSiirto ? 2 : nopeus) + yy;
+        double dx = suuntaX + yx;
+        double dy = suuntaY + yy;
         
         yx = (dx)- (long)(dx);
         yy = (dy)- (long)(dy);
@@ -60,8 +62,11 @@ public class Pallo implements Siirrettava, Sijaitsee{
         this.siirra((int)dx,(int)dy);
     }
     
-    public double getSuunta(){
-        return this.suunta;
+    public double getSuuntaX(){
+        return this.suuntaX;
+    }
+    public double getSuuntaY(){
+        return this.suuntaY;
     }
     
     public double getNopeus(){
@@ -72,11 +77,19 @@ public class Pallo implements Siirrettava, Sijaitsee{
         return this.sijainti;
     }
     
-    public void setSuunta(double suunta){
-        while(suunta >= 2*Math.PI){
-            suunta -= 2*Math.PI;
-        }
-        this.suunta = suunta;
+    public double getSijaintiX(){
+        return (double)this.getSijainti().getX() + yx;
+    }
+    
+    public double getSijaintiY(){
+        return (double)this.getSijainti().getY() + yy;
+    }
+    
+    public void setSuuntaX(double suunta){
+        this.suuntaX = suunta;
+    }
+    public void setSuuntaY(double suunta){
+        this.suuntaY = suunta;
     }
     
     public void setNopeus(double nopeus){
@@ -91,35 +104,30 @@ public class Pallo implements Siirrettava, Sijaitsee{
      * @param height
      * @return 
      */
-    public boolean testaaTormaukset(ArrayList<Palikka> palikat, Alusta alusta,int width, int height){
-        //Ylälaitatörmäys
-        if(this.sijainti.getY() <= 0){
-            this.tormaa();
-            pakotaSiirto = true;
-        }
-        // Alalaitatörmäys
-        if(this.sijainti.getY() >= height){
-            return false; // Game over
-        }
-        // Alustan törmäys
-        if(this.sijainti.getY() == alusta.getSijainti().getY() &&
-                this.sijainti.getX() >= alusta.getSijainti().getX() &&
-                this.sijainti.getX() <= (alusta.getSijainti().getX() + alusta.getLeveys())){
-            this.tormaa();
-            pakotaSiirto = true;
-        }
-        // Sivutörmäykset
-        if(this.sijainti.getX() >= width || this.sijainti.getX() <= 0){
-            this.tormaa();
-        }
-        return true;
-    }
+   
     
     /**
      * Törmäyttää pallon (muuttaa suunnan ja arpoo kulmaa)
      */
-    public void tormaa(){
-        this.setSuunta(this.suunta+Math.PI+r.nextDouble()*(r.nextBoolean() ? -0.1 : 0.1));
+    public void tormaa(Laita laita){
+        if(laita == Laita.OIKEA || laita == Laita.VASEN){
+            setSuuntaX(getSuuntaX() * -1.0D);
+            yx = (getSuuntaX() < 0.0D ? -1 : 1);
+        }
+        
+        if(laita == Laita.YLA || laita == Laita.ALA){
+            setSuuntaY(getSuuntaY() * -1.0D);
+            yy = (getSuuntaY() < 0.0D ? -1 : 1);
+        }
+        
+    }
+    public void tormaa(Laita laita,double kallistus){
+       tormaa(laita);
+       setSuuntaX(kallistus);
+    }
+    public void nopeuta(){
+        this.suuntaX *= 1.1;
+        this.suuntaY *= 1.1;
     }
     
 }

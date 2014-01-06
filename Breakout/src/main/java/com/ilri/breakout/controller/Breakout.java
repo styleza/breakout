@@ -5,7 +5,7 @@
  */
 
 package com.ilri.breakout.controller;
-import com.ilri.breakout.domain.Kartta;
+import com.ilri.breakout.domain.Logiikka;
 import com.ilri.breakout.gui.Piirtoalusta;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +19,7 @@ import javax.swing.Timer;
  */
 public class Breakout extends Timer implements ActionListener {
     private Piirtoalusta piirtoalusta;
-    private Kartta kartta;
+    private Logiikka kartta;
 
     private boolean jatkuu;
     private int leveys, korkeus;
@@ -30,9 +30,9 @@ public class Breakout extends Timer implements ActionListener {
     public Breakout(){
         super(1000,null);
         
-        this.leveys = 100;
-        this.korkeus = 100;
-        this.kartta = new Kartta(this.leveys,this.korkeus);
+        this.leveys = 30;
+        this.korkeus = 40;
+        this.kartta = new Logiikka(this.leveys,this.korkeus);
         
         
         addActionListener(this);
@@ -70,7 +70,7 @@ public class Breakout extends Timer implements ActionListener {
         return korkeus;
     }
     
-    public Kartta getKartta(){
+    public Logiikka getKartta(){
         return this.kartta;
     }
     

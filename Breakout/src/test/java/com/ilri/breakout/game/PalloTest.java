@@ -22,15 +22,17 @@ public class PalloTest {
     
     @Before
     public void setUp() {
-        double suunta = 1;
+        double suuntaX = 0;
+        double suuntaY = 1;
         double nopeus = 0.1;
         Piste pallonSijainti = new Piste(0,0);
-        this.pallo = new Pallo(suunta, nopeus,pallonSijainti);
+        this.pallo = new Pallo(suuntaX,suuntaY, nopeus,pallonSijainti);
     }
     
     @Test
     public void testaaAlustus(){
-        assertEquals(1.0,this.pallo.getSuunta(), 0.0);
+        assertEquals(1.0,this.pallo.getSuuntaY(), 0.0);
+        assertEquals(0.0,this.pallo.getSuuntaX(), 0.0);
         assertEquals(0.1,this.pallo.getNopeus(), 0.0);
         assertEquals(0,this.pallo.getSijainti().getX());
         assertEquals(0,this.pallo.getSijainti().getY());
@@ -46,16 +48,17 @@ public class PalloTest {
     @Test
     public void siirraPalloaYksiFrameYlospain(){
         pallo.setNopeus(1);
-        pallo.setSuunta(Math.PI / 2);
+        pallo.setSuuntaY(1);
+        pallo.setSuuntaX(0);
         pallo.siirra();
-        assertEquals(2,this.pallo.getSijainti().getX());
-        assertEquals(0,this.pallo.getSijainti().getY());
+        assertEquals(0,this.pallo.getSijainti().getX());
+        assertEquals(1,this.pallo.getSijainti().getY());
     }
     
     @Test
     public void siirraPalloaYksiFrameOikealle(){
         pallo.setNopeus(1);
-        pallo.setSuunta(0);
+        pallo.setSuuntaY(2);
         pallo.siirra();
         assertEquals(0,this.pallo.getSijainti().getX());
         assertEquals(2,this.pallo.getSijainti().getY());
@@ -69,8 +72,10 @@ public class PalloTest {
     
     @Test
     public void testaaAsetaSuunta(){
-        pallo.setSuunta(Math.PI);
-        assertEquals(Math.PI, this.pallo.getSuunta(), 0.0);
+        pallo.setSuuntaX(1);
+        pallo.setSuuntaY(5);
+        assertEquals(1, this.pallo.getSuuntaX(), 0.0);
+        assertEquals(5, this.pallo.getSuuntaY(), 0.0);
     }
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:

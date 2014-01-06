@@ -6,3 +6,4 @@ PVM	Tuntimäärä	Mitä tehty
 28.12   0.5             Törmäysdetectin miettiminen
 29.12   3               Törmäysdetecti, javadoc
 2.1     1               Sekvenssikaaviot, fiksattu parit testit törmäysdetectiä varten
+6.1     3               Viimeistelty/refaktoroitu pelilogiikkaa ja lisätty testejä

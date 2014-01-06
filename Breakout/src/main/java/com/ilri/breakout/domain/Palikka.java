@@ -27,4 +27,8 @@ public class Palikka implements Sijaitsee {
     public Piste getSijainti(){
         return this.sijainti;
     }
+    
+    public int getPisteet(){
+        return this.pisteet;
+    }
 }

@@ -35,7 +35,7 @@ public class Kayttoliittyma implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Breakout");
-        int leveys = this.peli.getLeveys() * palikanKoko +50;
+        int leveys = this.peli.getLeveys() * palikanKoko+15;
         int korkeus = this.peli.getKorkeus() * palikanKoko +50;
          
         frame.setPreferredSize(new Dimension(leveys, korkeus));
@@ -54,11 +54,11 @@ public class Kayttoliittyma implements Runnable {
      */
     public void luoKomponentit(Container container) {
 
-        Piirtoalusta pa = new Piirtoalusta(this.peli.getKartta(),this.palikanKoko);
+        Piirtoalusta pa = new Piirtoalusta(this.peli.getKartta(),this.palikanKoko,this.peli.getLeveys(),this.peli.getKorkeus());
         this.piirtoalusta = pa;
         container.add(pa);
         
-        Nappaimistonkuuntelija nk = new Nappaimistonkuuntelija(this.peli.getKartta().getAlusta());
+        Nappaimistonkuuntelija nk = new Nappaimistonkuuntelija(this.peli.getKartta());
         
         this.frame.addKeyListener(nk);
     }

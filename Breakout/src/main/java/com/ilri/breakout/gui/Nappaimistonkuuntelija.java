@@ -4,18 +4,18 @@ package com.ilri.breakout.gui;
  * Luokka joka siirtää alustaa pelissä
  * @author Ilari
  */
-import com.ilri.breakout.domain.Alusta;
+import com.ilri.breakout.domain.Logiikka;
 import java.awt.event.*;
 public class Nappaimistonkuuntelija implements KeyListener {
     
-    private Alusta alusta;
+    private Logiikka logiikka;
     
     /**
      * Luo näppäimistönkuuntelija
      * @param alusta 
      */
-    public Nappaimistonkuuntelija(Alusta alusta){
-        this.alusta = alusta;
+    public Nappaimistonkuuntelija(Logiikka logiikka){
+        this.logiikka = logiikka;
     }
     
     @Override
@@ -35,11 +35,15 @@ public class Nappaimistonkuuntelija implements KeyListener {
             case KeyEvent.VK_UP:
                 break;*/
             case KeyEvent.VK_LEFT:
-                alusta.siirra(-1, 0);
+                logiikka.siirraAlustaa(-1, 0);
                 break;
             case KeyEvent.VK_RIGHT:
-                alusta.siirra(1, 0);
+                logiikka.siirraAlustaa(1, 0);
                 break;
+            case KeyEvent.VK_SPACE:
+                logiikka.aloitaLopeta();
+                break;
+                
         }
     }
 
