@@ -11,7 +11,7 @@ import java.util.Random;
  * Itsestään liikkuva pallo
  * @author Ilari Richardt
  */
-public class Pallo implements Siirrettava, Sijaitsee{
+public class Pallo implements Siirrettava, Sijaitseva{
     private double suuntaX;              // X liikkuvuus
     private double suuntaY;              // Y liikkuvuus
     private double nopeus;              // sijaintia
@@ -96,18 +96,9 @@ public class Pallo implements Siirrettava, Sijaitsee{
         this.nopeus = nopeus;
     }
     
+
     /**
-     * Testaa törmäykset
-     * @param palikat
-     * @param alusta
-     * @param width
-     * @param height
-     * @return 
-     */
-   
-    
-    /**
-     * Törmäyttää pallon (muuttaa suunnan ja arpoo kulmaa)
+     * Törmäyttää pallon (muuttaa suunnan)
      */
     public void tormaa(Laita laita){
         if(laita == Laita.OIKEA || laita == Laita.VASEN){
@@ -121,10 +112,20 @@ public class Pallo implements Siirrettava, Sijaitsee{
         }
         
     }
+    
+    /**
+     * Törmäyttää pallon (muuttaa sunnan ja kallistaa palloa)
+     * @param laita
+     * @param kallistus 
+     */
     public void tormaa(Laita laita,double kallistus){
        tormaa(laita);
        setSuuntaX(kallistus);
     }
+    
+    /**
+     * Nopeuttaa peliä
+     */
     public void nopeuta(){
         this.suuntaX *= 1.1;
         this.suuntaY *= 1.1;

@@ -8,7 +8,7 @@ package com.ilri.breakout.domain;
  * Siirrettävä alusta jota pelaaja siirtä 
  * @author Ilari Richardt
  */
-public class Alusta implements Siirrettava, Sijaitsee {
+public class Alusta implements Siirrettava, Sijaitseva {
     public static int ALUSTAN_LEVEYS = 10;
     private Piste sijainti;
     private int leveys;

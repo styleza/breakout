@@ -8,7 +8,7 @@ package com.ilri.breakout.domain;
  * Tuhottava palikka pelissä
  * @author Ilari Richardt
  */
-public class Palikka implements Sijaitsee {
+public class Palikka implements Sijaitseva {
     
     private Piste sijainti;
     private int pisteet;

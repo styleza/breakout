@@ -4,6 +4,7 @@
  */
 package com.ilri.breakout.game;
 
+import com.ilri.breakout.domain.Laita;
 import com.ilri.breakout.domain.Pallo;
 import com.ilri.breakout.domain.Piste;
 import org.junit.Before;
@@ -77,6 +78,37 @@ public class PalloTest {
         assertEquals(1, this.pallo.getSuuntaX(), 0.0);
         assertEquals(5, this.pallo.getSuuntaY(), 0.0);
     }
+    
+    @Test
+    public void testaaSmoothLiikkuminen(){
+        pallo.setSuuntaX(0.1);
+        pallo.setSuuntaY(0.1);
+        pallo.siirra();
+        assertEquals(0.1,pallo.getSijaintiX(),0.001);
+        assertEquals(0.1,pallo.getSijaintiY(),0.001);
+    }
+    
+    @Test
+    public void testaaTormaysReaktioVasenOikea(){
+        pallo.setSuuntaX(1);
+        pallo.tormaa(Laita.VASEN);
+        assertEquals(-1.0,pallo.getSuuntaX(),0.0);
+        pallo.tormaa(Laita.OIKEA);
+        assertEquals(1.0,pallo.getSuuntaX(),0.0);
+        
+        
+    }
+    
+    @Test
+    public void testaaTormaysReaktioYlaAla(){
+        pallo.tormaa(Laita.ALA);
+        assertEquals(-1.0,pallo.getSuuntaY(),0.0);
+        pallo.tormaa(Laita.YLA);
+        assertEquals(1.0,pallo.getSuuntaY(),0.0);
+        
+        
+    }
+
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //

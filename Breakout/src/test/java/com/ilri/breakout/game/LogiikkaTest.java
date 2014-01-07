@@ -74,4 +74,61 @@ public class LogiikkaTest {
         logiikka.toimi();
         assertEquals(-1.1,logiikka.getPallo().getSuuntaY(),0.01);
     }
+    
+    @Test
+    public void testaaAlusta(){
+        assertNotNull(logiikka.getAlusta());
+    }
+    
+    @Test
+    public void testaaKellopulssi(){
+        logiikka.aloitaLopeta();
+        assertTrue(logiikka.toimi());
+        assertEquals(37.7,logiikka.getPallo().getSijaintiY(),0.001);
+    }
+    
+    @Test
+    public void testaaAlustaSiirto(){
+        assertEquals(10,logiikka.getAlusta().getSijainti().getX());
+        logiikka.aloitaLopeta();
+        logiikka.siirraAlustaa(-1, 0);
+        assertEquals(9,logiikka.getAlusta().getSijainti().getX());
+        logiikka.siirraAlustaa(-10, 0);
+        assertEquals(9,logiikka.getAlusta().getSijainti().getX());
+        logiikka.siirraAlustaa(20, 0);
+        assertEquals(9,logiikka.getAlusta().getSijainti().getX());
+    }
+    
+    @Test
+    public void testaaGetPisteet(){
+        assertEquals(0,logiikka.getPisteet());
+    }
+    
+    @Test
+    public void testaaSivuTormays(){
+        logiikka.getPallo().setSuuntaX(5);
+        logiikka.getPallo().siirra(15, 0);
+        assertTrue(logiikka.testaaTormaykset());
+        assertEquals(-5.0,logiikka.getPallo().getSuuntaX(),0.001);
+        logiikka.getPallo().siirra(-30, 0);
+        assertTrue(logiikka.testaaTormaykset());
+        assertEquals(5.0,logiikka.getPallo().getSuuntaX(),0.001);
+    }
+    
+    @Test
+    public void testaaYlalaitaTormays(){
+        logiikka.getPallo().setSuuntaY(5);
+        logiikka.getPallo().siirra(0, -40);
+        assertTrue(logiikka.testaaTormaykset());
+        assertEquals(-5.0,logiikka.getPallo().getSuuntaY(),0.001);
+    }
+    
+    @Test
+    public void testaaAlalaitaTormays(){
+        logiikka.siirraAlustaa(-10, 0);
+        logiikka.getPallo().setSuuntaY(5);
+        logiikka.getPallo().siirra();
+        assertFalse(logiikka.testaaTormaykset());
+    }
+    
 }

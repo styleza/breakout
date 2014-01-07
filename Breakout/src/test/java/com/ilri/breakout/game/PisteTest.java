@@ -27,6 +27,14 @@ public class PisteTest {
     public void testaaAlustus(){
         assertEquals(1,this.piste.getX());
         assertEquals(1,this.piste.getY());
+        
+    }
+    
+    @Test
+    public void testaaAlustus2(){
+        Piste p = new Piste();
+        assertEquals(0,p.getX());
+        assertEquals(0,p.getY());
     }
     
     @Test
@@ -34,6 +42,24 @@ public class PisteTest {
         piste.siirra(1,1);
         assertEquals(2,this.piste.getX());
         assertEquals(2,this.piste.getY());
+    }
+    
+    @Test
+    public void testaaEquals(){
+        
+        Piste p2 = new Piste(1,1);
+        assertTrue(p2.equals(piste));
+        
+        assertFalse(p2.equals(null));
+        
+        Object f = new Object();
+        assertFalse(p2.equals(f));
+        
+        Piste p3 = new Piste();
+        assertFalse(p3.equals(piste));
+        
+        Piste p4 = new Piste(1,0);
+        assertFalse(p4.equals(piste));
     }
     
     // TODO add test methods here.

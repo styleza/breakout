@@ -23,6 +23,7 @@ public class Logiikka {
     private boolean jatkuu;
     
     private String message;
+    
     /**
      * Luo kartta leveydellä ja korkeudella
      * @param leveys
@@ -79,12 +80,20 @@ public class Logiikka {
         return this.pallo;
     }
     
+    /**
+     * Lisää palikoiden pisteet (sijainnit) parametrinä annettuun arraylistiin
+     * @param pisteet 
+     */
     private void lisaaPalikoidenPisteet(ArrayList<Piste> pisteet){
         for(Palikka palikka : this.palikat){
             pisteet.add(palikka.getSijainti());
         }
     }
     
+    /**
+     * Lisää Alustan pisteet (palikoiden sijainnit) parametrinä annetuun arraylistiin
+     * @param pisteet 
+     */
     private void lisaaAlustanPisteet(ArrayList<Piste> pisteet){
         Piste p = this.alusta.getSijainti();
         for(int i = 0; i < this.alusta.getLeveys(); i++){
@@ -114,6 +123,11 @@ public class Logiikka {
         return true;
     }
     
+    /**
+     * Testaa kaikki törmäykset joita pallolla voi olla,
+     * palauttaa true jos peli voi jatkua ja false jos peli täytyy lopettaa
+     * @return 
+     */
      public boolean testaaTormaykset(){
          int pX = pallo.getSijainti().getX();
          int pY = pallo.getSijainti().getY();
@@ -183,12 +197,25 @@ public class Logiikka {
          return this.pisteet;
      }
      
+     /**
+      * Siirtää alustaa annetun parametrin verran sivulle
+      * @param dx
+      * @param dy 
+      */
      public void siirraAlustaa(int dx,int dy){
-         if(this.jatkuu){
+         if(this.jatkuu &&
+                 alusta.getSijainti().getX()+dx+alusta.getLeveys() <= this.leveys &&
+                 alusta.getSijainti().getX()+dx > 0 &&
+                 dy == 0){
+             
             this.alusta.siirra(dx, dy);
          }
      }
      
+     /**
+      * Aloittaa tai lopettaa pelin (start/pause)
+      * Lisää myös viestin peliin tarvittaessa
+      */
      public void aloitaLopeta(){
          jatkuu = !jatkuu;
          if(!jatkuu){
