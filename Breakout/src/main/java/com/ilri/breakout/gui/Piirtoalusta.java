@@ -41,6 +41,7 @@ public class Piirtoalusta extends JPanel {
         g.fill3DRect(0, 0, leveys * palikanKoko, korkeus * palikanKoko+20,true);
         g.setColor(Color.white);
         g.drawString("SCORE: "+kartta.getPisteet(), 0, 9);
+        g.drawString("HIGHSCORE: "+kartta.getHighscore(), 150, 9);
         
         for(Piste p : kartta.getAlustanPisteet()){
             g.fill3DRect(p.getX() * this.palikanKoko,

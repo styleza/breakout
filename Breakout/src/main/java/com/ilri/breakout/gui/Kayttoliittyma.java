@@ -35,12 +35,14 @@ public class Kayttoliittyma implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Breakout");
-        int leveys = this.peli.getLeveys() * palikanKoko+15;
-        int korkeus = this.peli.getKorkeus() * palikanKoko +50;
+        int leveys = this.peli.getLeveys() * palikanKoko+5;
+        int korkeus = this.peli.getKorkeus() * palikanKoko +45;
          
         frame.setPreferredSize(new Dimension(leveys, korkeus));
  
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        
+        frame.setResizable(false);
  
         luoKomponentit(frame.getContentPane());
  

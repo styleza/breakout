@@ -42,7 +42,7 @@ public class LogiikkaTest {
     
     @Test
     public void testaaAlustus(){
-        assertEquals("PRESS SPACE TO START",logiikka.getMessage());
+        assertEquals("PRESS SPACE TO START, X TO RESTART",logiikka.getMessage());
         assertEquals(new Piste(15,38),logiikka.getPallo().getSijainti());
     }
     
@@ -131,5 +131,17 @@ public class LogiikkaTest {
         logiikka.getPallo().siirra();
         assertFalse(logiikka.testaaTormaykset());
     }
+    
+    @Test
+    public void testaaHighscore(){
+        logiikka.paivitaHighscore(10);
+        assertEquals(10,logiikka.getHighscore());
+        logiikka.paivitaHighscore(20);
+        assertEquals(20,logiikka.getHighscore());
+        
+        logiikka.paivitaHighscore(10);
+        assertEquals(20,logiikka.getHighscore());
+    }
+
     
 }

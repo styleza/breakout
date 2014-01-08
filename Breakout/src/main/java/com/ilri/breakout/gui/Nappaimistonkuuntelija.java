@@ -43,6 +43,9 @@ public class Nappaimistonkuuntelija implements KeyListener {
             case KeyEvent.VK_SPACE:
                 logiikka.aloitaLopeta();
                 break;
+            case KeyEvent.VK_X:
+                logiikka.reset();
+                break;
                 
         }
     }

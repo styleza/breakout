@@ -19,6 +19,7 @@ public class Logiikka {
     private int korkeus;
     
     private int pisteet;
+    private int highscore;
     
     private boolean jatkuu;
     
@@ -32,36 +33,14 @@ public class Logiikka {
     public Logiikka(int leveys, int korkeus){
         this.ran = new Random();
         this.palikat = new ArrayList<Palikka>();
-        // @TODO: luo palikat
-        
-        for(int y = 2; y < 5 ; y++){
-            for(int x = 0; x < leveys; x++){
-                Piste palikanSijainti = new Piste(x,y);
-                Palikka p = new Palikka(palikanSijainti,(ran.nextInt(3)+1)*10);
-                palikat.add(p);
-            }
-        }
-        
-        
-        Piste alustanSijantin = new Piste(
-                leveys / 2 - Alusta.ALUSTAN_LEVEYS / 2,     // X - koordinaatti
-                korkeus - 1);                               // Y - koordinaatti
-        
-        this.alusta = new Alusta(alustanSijantin);
-        
-        // @TODO: aseta pallo oikeaan paikkaan ja arvo suunta
-        Piste pallonSijainti = new Piste(
-                leveys / 2,                                 // X - koordinaatti
-                korkeus - 2);                               // Y - koordinaatti
-        this.pallo = new Pallo(0,-0.1, 0.1, pallonSijainti);
-        
+
         this.leveys = leveys;
         this.korkeus = korkeus;
         
-        this.pisteet = 0;
+        reset();
         
-        jatkuu = true;
-        aloitaLopeta();
+        highscore = 0;
+        
     }
     
     /**
@@ -127,7 +106,7 @@ public class Logiikka {
         }
         // Alalaitatörmäys
         if(pY >= korkeus){
-            this.message = "GAME OVER SCORE: "+this.pisteet;
+            this.message = "GAME OVER SCORE: "+this.pisteet+" PRESS X TO RESTART";
             return false; // Game over
         }
         // Alustan törmäys
@@ -184,6 +163,7 @@ public class Logiikka {
             
             if(tormaa){
                 pisteet += p.getPisteet();
+                paivitaHighscore(pisteet);
                 palikat.remove(p);
                 if(palikat.size() == 0){
                     aloitaLopeta();
@@ -222,7 +202,7 @@ public class Logiikka {
      public void aloitaLopeta(){
          jatkuu = !jatkuu;
          if(!jatkuu){
-             message = "PRESS SPACE TO START";
+             message = "PRESS SPACE TO START, X TO RESTART";
          }
          if(jatkuu){
              message = "";
@@ -236,4 +216,48 @@ public class Logiikka {
      public boolean getJatkuu(){
          return this.jatkuu;
      }
+     
+     public void paivitaHighscore(int pisteet){
+         if(pisteet > highscore){
+             highscore = pisteet;
+         }
+     }
+     
+     public int getHighscore(){
+         return highscore;
+     }
+     
+     public void reset(){
+         if(jatkuu){
+             return;
+         }
+         
+         palikat.clear();
+         
+         for(int y = 2; y < 5 ; y++){
+            for(int x = 0; x < leveys; x++){
+                Piste palikanSijainti = new Piste(x,y);
+                Palikka p = new Palikka(palikanSijainti,(ran.nextInt(3)+1)*10);
+                palikat.add(p);
+            }
+        }
+        
+        Piste alustanSijantin = new Piste(
+                leveys / 2 - Alusta.ALUSTAN_LEVEYS / 2,     // X - koordinaatti
+                korkeus - 1);                               // Y - koordinaatti
+        
+        this.alusta = new Alusta(alustanSijantin);
+        
+        Piste pallonSijainti = new Piste(
+                leveys / 2,                                 // X - koordinaatti
+                korkeus - 2);                               // Y - koordinaatti
+        this.pallo = new Pallo(0,-0.1, 0.1, pallonSijainti);
+        
+        this.pisteet = 0;
+        
+        jatkuu = true;
+        aloitaLopeta();
+        
+     }
+     
 }
