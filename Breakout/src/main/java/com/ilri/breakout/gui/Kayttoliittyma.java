@@ -26,7 +26,7 @@ public class Kayttoliittyma implements Runnable {
     
     public Kayttoliittyma(Breakout peli) {
         this.peli = peli;
-        this.palikanKoko = 5;
+        this.palikanKoko = 12;
     }
  
     /**

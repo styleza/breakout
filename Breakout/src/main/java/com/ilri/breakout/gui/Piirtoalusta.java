@@ -6,6 +6,7 @@
 
 package com.ilri.breakout.gui;
 import com.ilri.breakout.domain.Logiikka;
+import com.ilri.breakout.domain.Palikka;
 import com.ilri.breakout.domain.Pallo;
 import com.ilri.breakout.domain.Piste;
 import java.awt.Color;
@@ -20,6 +21,8 @@ public class Piirtoalusta extends JPanel {
     int palikanKoko;
     int leveys;
     int korkeus;
+    static final Color[] varit = {Color.red, Color.green, Color.blue};
+    
     public Piirtoalusta(Logiikka kartta, int palikanKoko, int leveys, int korkeus){
         this.kartta = kartta;
         this.palikanKoko = palikanKoko;
@@ -39,13 +42,22 @@ public class Piirtoalusta extends JPanel {
         g.setColor(Color.white);
         g.drawString("SCORE: "+kartta.getPisteet(), 0, 9);
         
-        for(Piste p : kartta.getPalikatJaAlusta()){
+        for(Piste p : kartta.getAlustanPisteet()){
             g.fill3DRect(p.getX() * this.palikanKoko,
                     p.getY() * this.palikanKoko,
                     this.palikanKoko,
                     this.palikanKoko,
                     true);
         }
+        for(Palikka palikka : kartta.getPalikat()){
+            g.setColor(varit[(palikka.getPisteet()-10)/10]);
+            g.fill3DRect(palikka.getSijainti().getX() * this.palikanKoko,
+                    palikka.getSijainti().getY() * this.palikanKoko,
+                    this.palikanKoko,
+                    this.palikanKoko,
+                    true);
+        }
+        g.setColor(Color.white);
         Pallo p = kartta.getPallo();
         
         g.fillOval((int)(p.getSijaintiX() * this.palikanKoko),

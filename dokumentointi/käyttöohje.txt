@@ -1,0 +1,8 @@
+1. avaa peli
+2. paina space
+3. peli alkaa
+4. pelaa niin kauan kunnes voitat tai h‰vi‰t
+
+Pelin voi keskeytt‰‰ painamalla space ja jatkaa taas painamalla space uudelleen.
+Peliss‰ pallon nopeus kasvaa jolloin peli muuttuu haastavammaksi hetki hetkelt‰.
+Pelin lopuksi peli ilmoittaa saamasi pistem‰‰r‰n.

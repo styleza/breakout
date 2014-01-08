@@ -37,7 +37,7 @@ public class Logiikka {
         for(int y = 2; y < 5 ; y++){
             for(int x = 0; x < leveys; x++){
                 Piste palikanSijainti = new Piste(x,y);
-                Palikka p = new Palikka(palikanSijainti,10);
+                Palikka p = new Palikka(palikanSijainti,(ran.nextInt(3)+1)*10);
                 palikat.add(p);
             }
         }
@@ -53,7 +53,7 @@ public class Logiikka {
         Piste pallonSijainti = new Piste(
                 leveys / 2,                                 // X - koordinaatti
                 korkeus - 2);                               // Y - koordinaatti
-        this.pallo = new Pallo(0,-0.3, 0.1, pallonSijainti);
+        this.pallo = new Pallo(0,-0.1, 0.1, pallonSijainti);
         
         this.leveys = leveys;
         this.korkeus = korkeus;
@@ -68,38 +68,26 @@ public class Logiikka {
      * Hae kaikkien komponenttien pisteet (Alusta, Palikat, Pallo)
      * @return 
      */
-    public ArrayList<Piste> getPalikatJaAlusta(){
-        ArrayList<Piste> rv = new ArrayList<Piste>();
-        
-        lisaaAlustanPisteet(rv);
-        lisaaPalikoidenPisteet(rv);
-        
-        return rv;
+    public ArrayList<Palikka> getPalikat(){
+        return this.palikat;
     }
+    
     public Pallo getPallo(){
         return this.pallo;
     }
-    
+
     /**
-     * Lisää palikoiden pisteet (sijainnit) parametrinä annettuun arraylistiin
-     * @param pisteet 
+     * Palauttaa Alustan pisteet (palikoiden sijainnit)
+     * @return ArrayList
      */
-    private void lisaaPalikoidenPisteet(ArrayList<Piste> pisteet){
-        for(Palikka palikka : this.palikat){
-            pisteet.add(palikka.getSijainti());
-        }
-    }
-    
-    /**
-     * Lisää Alustan pisteet (palikoiden sijainnit) parametrinä annetuun arraylistiin
-     * @param pisteet 
-     */
-    private void lisaaAlustanPisteet(ArrayList<Piste> pisteet){
+    public ArrayList<Piste> getAlustanPisteet(){
+        ArrayList<Piste> rv = new ArrayList<Piste>();
         Piste p = this.alusta.getSijainti();
         for(int i = 0; i < this.alusta.getLeveys(); i++){
             Piste p2 = new Piste(p.getX()+i,p.getY());
-            pisteet.add(p2);
+            rv.add(p2);
         }
+        return rv;
     }
     
     public Alusta getAlusta(){
@@ -131,8 +119,10 @@ public class Logiikka {
      public boolean testaaTormaykset(){
          int pX = pallo.getSijainti().getX();
          int pY = pallo.getSijainti().getY();
+         boolean siirtyyYlos = pallo.getSuuntaY() < 0.0D;
+         boolean siirtyyVasemalle = pallo.getSuuntaX() < 0.0D;
         //Ylälaitatörmäys
-        if(pY <= 0){
+        if(pY <= 0 && siirtyyYlos){
             pallo.tormaa(Laita.YLA);
         }
         // Alalaitatörmäys
@@ -141,7 +131,7 @@ public class Logiikka {
             return false; // Game over
         }
         // Alustan törmäys
-        if(pY + (pallo.getSuuntaY() < 0.0D ? -1 : 1) == alusta.getSijainti().getY() &&
+        if(pY + (siirtyyYlos ? -1 : 1) == alusta.getSijainti().getY() &&
                 pX >= alusta.getSijainti().getX() &&
                 pX <= (alusta.getSijainti().getX() + alusta.getLeveys())){
             
@@ -149,36 +139,45 @@ public class Logiikka {
                     i < (alusta.getSijainti().getX() + alusta.getLeveys());
                     i++){
                 if(i == pX){
-                    pallo.tormaa(Laita.ALA,
-                            ((double)((i-alusta.getSijainti().getX())-alusta.getLeveys())/
-                                    (double)alusta.getLeveys()) * 0.3D
-                    );
+                    double kallistus = i - alusta.getSijainti().getX();
+                    kallistus -= alusta.getLeveys()/2;
+                    kallistus *= 0.05D;
+                    pallo.tormaa(Laita.ALA, kallistus);
                     pallo.nopeuta();
                 }
             }
             
         }
         // Sivutörmäykset
-        if(pX >= leveys || pX <= 0){
+        if((pX >= leveys-1 && !siirtyyVasemalle) || 
+                (pX <= 0 && siirtyyVasemalle)){
             pallo.tormaa(Laita.VASEN);
         }
         
         // Palikkatörmäykset
         for(Palikka p : palikat){
             boolean tormaa = false;
-            if(p.getSijainti().getX() == pX+1 && p.getSijainti().getY() == pY){
+            if(p.getSijainti().getX() == pX+1 &&
+                    p.getSijainti().getY() == pY &&
+                    !siirtyyVasemalle){
                 pallo.tormaa(Laita.OIKEA);
                 tormaa = true;
             }
-            if(p.getSijainti().getX() == pX-1 && p.getSijainti().getY() == pY){
+            if(p.getSijainti().getX() == pX-1 &&
+                    p.getSijainti().getY() == pY &&
+                    siirtyyVasemalle){
                 pallo.tormaa(Laita.VASEN);
                 tormaa = true;
             }
-            if(p.getSijainti().getX() == pX && p.getSijainti().getY() == pY+1){
+            if(p.getSijainti().getX() == pX &&
+                    p.getSijainti().getY() == pY+1 &&
+                    !siirtyyYlos){
                 pallo.tormaa(Laita.YLA);
                 tormaa = true;
             }
-            if(p.getSijainti().getX() == pX && p.getSijainti().getY() == pY-1){
+            if(p.getSijainti().getX() == pX &&
+                    p.getSijainti().getY() == pY-1 &&
+                    siirtyyYlos){
                 pallo.tormaa(Laita.ALA);
                 tormaa = true;
             }
@@ -186,6 +185,10 @@ public class Logiikka {
             if(tormaa){
                 pisteet += p.getPisteet();
                 palikat.remove(p);
+                if(palikat.size() == 0){
+                    aloitaLopeta();
+                    message = "YOU WON! SCORE"+this.pisteet;
+                }
                 break;
             }
         }
@@ -205,7 +208,7 @@ public class Logiikka {
      public void siirraAlustaa(int dx,int dy){
          if(this.jatkuu &&
                  alusta.getSijainti().getX()+dx+alusta.getLeveys() <= this.leveys &&
-                 alusta.getSijainti().getX()+dx > 0 &&
+                 alusta.getSijainti().getX()+dx >= 0 &&
                  dy == 0){
              
             this.alusta.siirra(dx, dy);

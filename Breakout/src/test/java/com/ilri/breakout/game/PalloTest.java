@@ -108,6 +108,31 @@ public class PalloTest {
         
         
     }
+    
+    @Test
+    public void testaaNopeutus(){
+        pallo.setSuuntaX(0.99);
+        pallo.setSuuntaY(0.99);
+        pallo.nopeuta();
+        assertEquals(1.089,pallo.getSuuntaX(),0.001);
+        assertEquals(1.089,pallo.getSuuntaY(),0.001);
+        pallo.nopeuta();
+        assertEquals(1.089,pallo.getSuuntaX(),0.001);
+        assertEquals(1.089,pallo.getSuuntaY(),0.001);
+    }
+    
+    @Test
+    public void testaaSiirra2(){
+        pallo.setSuuntaX(10.9);
+        pallo.setSuuntaY(10.9);
+        pallo.siirra();
+        assertEquals(10,pallo.getSijainti().getX());
+        assertEquals(10,pallo.getSijainti().getY());
+        
+        pallo.siirra();
+        assertEquals(21,pallo.getSijainti().getX());
+        assertEquals(21,pallo.getSijainti().getY());
+    }
 
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:

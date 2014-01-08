@@ -103,12 +103,12 @@ public class Pallo implements Siirrettava, Sijaitseva{
     public void tormaa(Laita laita){
         if(laita == Laita.OIKEA || laita == Laita.VASEN){
             setSuuntaX(getSuuntaX() * -1.0D);
-            yx = (getSuuntaX() < 0.0D ? -1 : 1);
+            yx = (getSuuntaX() < 0.0D ? -0.1 : 0.1);
         }
         
         if(laita == Laita.YLA || laita == Laita.ALA){
             setSuuntaY(getSuuntaY() * -1.0D);
-            yy = (getSuuntaY() < 0.0D ? -1 : 1);
+            yy = (getSuuntaY() < 0.0D ? -0.1 : 0.1);
         }
         
     }
@@ -127,8 +127,12 @@ public class Pallo implements Siirrettava, Sijaitseva{
      * Nopeuttaa peliä
      */
     public void nopeuta(){
-        this.suuntaX *= 1.1;
-        this.suuntaY *= 1.1;
+        if(suuntaX < 1.0){
+            this.suuntaX *= 1.1;
+        }
+        if(suuntaY < 1.0){
+            this.suuntaY *= 1.1;
+        }
     }
     
 }

@@ -58,7 +58,7 @@ public class Breakout extends Timer implements ActionListener {
            // jatkuu = false;
         }
         piirtoalusta.repaint();
-        super.setDelay(50);
+        super.setDelay(20);
         
     }
 

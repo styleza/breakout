@@ -48,7 +48,8 @@ public class LogiikkaTest {
     
     @Test
     public void testaaPalikatJaAlusta(){
-        assertEquals(100,logiikka.getPalikatJaAlusta().size());
+        assertEquals(10,logiikka.getAlustanPisteet().size());
+        assertEquals(90,logiikka.getPalikat().size());
     }
     
     @Test
@@ -84,7 +85,7 @@ public class LogiikkaTest {
     public void testaaKellopulssi(){
         logiikka.aloitaLopeta();
         assertTrue(logiikka.toimi());
-        assertEquals(37.7,logiikka.getPallo().getSijaintiY(),0.001);
+        assertEquals(37.9,logiikka.getPallo().getSijaintiY(),0.001);
     }
     
     @Test
@@ -117,10 +118,10 @@ public class LogiikkaTest {
     
     @Test
     public void testaaYlalaitaTormays(){
-        logiikka.getPallo().setSuuntaY(5);
+        logiikka.getPallo().setSuuntaY(-5);
         logiikka.getPallo().siirra(0, -40);
         assertTrue(logiikka.testaaTormaykset());
-        assertEquals(-5.0,logiikka.getPallo().getSuuntaY(),0.001);
+        assertEquals(5.0,logiikka.getPallo().getSuuntaY(),0.001);
     }
     
     @Test
