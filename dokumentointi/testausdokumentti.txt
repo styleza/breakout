@@ -1,0 +1,12 @@
+Käyttöliittymää ei ole testattu unit testeillä.
+Käyttöliittymä vaikuttaa toimivan, testatut kohteet:
+
+1. resettaa peli alussa
+2. aloita peli
+3. pysäytä peli (paina space)
+4. häviä elämä
+5. häviä lopullisesti
+6. Käyttöliittymän ulkoasu vastaa haluttua
+7. alustaa ei voi siirtää mielivaltaisesti ylos pelistä
+
+Tunnettuja bugeja ei ole

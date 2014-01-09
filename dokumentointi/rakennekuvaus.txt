@@ -1,0 +1,8 @@
+Ohjelmassa on neljä eri pakettia, jokaisella on oma vastuutehtävänsä:
+1. breakout (pelin käynnistys)
+2. controller (kontrolloi pelilogiikkaa ja käyttöliittymää, toimii niiden välisenä rajapintana)
+3. domain (sisältää kaiken pelilogiikan)
+4. gui (sisältää kaiken käyttöliittymään liittyvän asian
+
+domain paketissa on kaikki pelilogiikkaan liittyvät luokat.
+gui paketti käytännössä mallintaa domain paketin graafisessa muodossa ja antaa pelilogiikalle user-inputin (eli näppäimistökomennot)

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ilri.breakout.domain;
 
 /**
@@ -48,11 +44,6 @@ public class Piste implements Siirrettava{
         return this.y;
     }
 
-    /**
-     * Testaa ovatko pisteet samat
-     * @param obj
-     * @return 
-     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {

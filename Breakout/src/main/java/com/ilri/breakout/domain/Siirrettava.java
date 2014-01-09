@@ -1,12 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ilri.breakout.domain;
 
 /**
  * Siirrettävä 
- * @author Ilari Richardt
+ * @author Ilari
  */
 public interface Siirrettava {
     void siirra(int dx, int dy);

@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.ilri.breakout.game;
 
 import com.ilri.breakout.domain.Logiikka;
@@ -85,7 +79,7 @@ public class LogiikkaTest {
     public void testaaKellopulssi(){
         logiikka.aloitaLopeta();
         assertTrue(logiikka.toimi());
-        assertEquals(37.9,logiikka.getPallo().getSijaintiY(),0.001);
+        assertEquals(37.8,logiikka.getPallo().getSijaintiY(),0.001);
     }
     
     @Test
@@ -141,6 +135,37 @@ public class LogiikkaTest {
         
         logiikka.paivitaHighscore(10);
         assertEquals(20,logiikka.getHighscore());
+    }
+    
+    @Test
+    public void testaaLives(){
+        assertEquals(3,logiikka.getLives());
+        logiikka.aloitaLopeta();
+        logiikka.siirraAlustaa(-10, 0);
+        logiikka.getPallo().setSuuntaY(10);
+        logiikka.getPallo().siirra();
+        assertFalse(logiikka.toimi());
+        assertEquals(2,logiikka.getLives());
+    }
+    
+    @Test
+    public void testaaReset(){
+        logiikka.reset(false);
+        assertEquals(90,logiikka.getPalikat().size());
+        assertEquals(0,logiikka.getPisteet());
+        assertEquals(3,logiikka.getLives());
+    }
+    
+    @Test
+    public void testaaReset2(){
+        assertEquals(3,logiikka.getLives());
+        logiikka.aloitaLopeta();
+        logiikka.getPallo().siirra(0,10);
+        assertFalse(logiikka.toimi());
+        assertEquals(2,logiikka.getLives());
+        logiikka.reset(false);
+        assertEquals(2,logiikka.getLives());
+        
     }
 
     

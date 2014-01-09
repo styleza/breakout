@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ilri.breakout.domain;
 
 import java.util.ArrayList;
@@ -9,7 +5,7 @@ import java.util.Random;
 
 /**
  * Itsestään liikkuva pallo
- * @author Ilari Richardt
+ * @author Ilari
  */
 public class Pallo implements Siirrettava, Sijaitseva{
     private double suuntaX;              // X liikkuvuus
@@ -19,7 +15,6 @@ public class Pallo implements Siirrettava, Sijaitseva{
     private double yx;
     private double yy;
     boolean pakotaSiirto;
-    Random r;
     
     /**
      * Luo pallo suunnalla, nopeudella ja sijainnilla
@@ -35,7 +30,6 @@ public class Pallo implements Siirrettava, Sijaitseva{
         this.sijainti = sijainti;
         yy = yx = 0.0;
         pakotaSiirto = true;
-        r = new Random();
     }
 
     /**

@@ -5,7 +5,7 @@ import com.ilri.breakout.gui.Kayttoliittyma;
 import javax.swing.SwingUtilities;
 
 /**
- * Hello world!
+ * Breakout App
  *
  */
 public class App 

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ilri.breakout.domain;
 import java.util.ArrayList;
 import java.util.Random;
@@ -20,8 +16,10 @@ public class Logiikka {
     
     private int pisteet;
     private int highscore;
+    private int lives;
     
     private boolean jatkuu;
+    private boolean peliOhi;
     
     private String message;
     
@@ -37,16 +35,12 @@ public class Logiikka {
         this.leveys = leveys;
         this.korkeus = korkeus;
         
-        reset();
+        reset(true);
         
         highscore = 0;
         
     }
     
-    /**
-     * Hae kaikkien komponenttien pisteet (Alusta, Palikat, Pallo)
-     * @return 
-     */
     public ArrayList<Palikka> getPalikat(){
         return this.palikat;
     }
@@ -78,12 +72,21 @@ public class Logiikka {
      * @return 
      */
     public boolean toimi(){
-        if(!jatkuu){
+        if(!jatkuu || peliOhi){
             return false;
         }
         
         jatkuu = testaaTormaykset();
         if(!jatkuu){
+            this.lives--;
+            if(this.lives > 0){
+                reset(false);
+                this.message = "YOU HAVE "+this.lives+" LIVES LEFT, PRESS SPACE TO START";
+            } else {
+                peliOhi = true;
+                this.message = "GAME OVER SCORE: "+this.pisteet+" PRESS X TO RESTART";
+            }
+            
             return false;
         }
         this.pallo.siirra();
@@ -99,14 +102,14 @@ public class Logiikka {
          int pX = pallo.getSijainti().getX();
          int pY = pallo.getSijainti().getY();
          boolean siirtyyYlos = pallo.getSuuntaY() < 0.0D;
-         boolean siirtyyVasemalle = pallo.getSuuntaX() < 0.0D;
+         int siirtyyVasemalle = pallo.getSuuntaX() < 0.0D ? -1 :
+                 (pallo.getSuuntaX() == 0.0D ? 0 : 1);
         //Ylälaitatörmäys
         if(pY <= 0 && siirtyyYlos){
             pallo.tormaa(Laita.YLA);
         }
         // Alalaitatörmäys
         if(pY >= korkeus){
-            this.message = "GAME OVER SCORE: "+this.pisteet+" PRESS X TO RESTART";
             return false; // Game over
         }
         // Alustan törmäys
@@ -120,7 +123,7 @@ public class Logiikka {
                 if(i == pX){
                     double kallistus = i - alusta.getSijainti().getX();
                     kallistus -= alusta.getLeveys()/2;
-                    kallistus *= 0.05D;
+                    kallistus *= 0.01D;
                     pallo.tormaa(Laita.ALA, kallistus);
                     pallo.nopeuta();
                 }
@@ -128,8 +131,8 @@ public class Logiikka {
             
         }
         // Sivutörmäykset
-        if((pX >= leveys-1 && !siirtyyVasemalle) || 
-                (pX <= 0 && siirtyyVasemalle)){
+        if((pX >= leveys-1 && siirtyyVasemalle==1) || 
+                (pX <= 0 && siirtyyVasemalle == -1)){
             pallo.tormaa(Laita.VASEN);
         }
         
@@ -138,13 +141,13 @@ public class Logiikka {
             boolean tormaa = false;
             if(p.getSijainti().getX() == pX+1 &&
                     p.getSijainti().getY() == pY &&
-                    !siirtyyVasemalle){
+                    siirtyyVasemalle == 1){
                 pallo.tormaa(Laita.OIKEA);
                 tormaa = true;
             }
             if(p.getSijainti().getX() == pX-1 &&
                     p.getSijainti().getY() == pY &&
-                    siirtyyVasemalle){
+                    siirtyyVasemalle== -1){
                 pallo.tormaa(Laita.VASEN);
                 tormaa = true;
             }
@@ -200,6 +203,9 @@ public class Logiikka {
       * Lisää myös viestin peliin tarvittaessa
       */
      public void aloitaLopeta(){
+         if(peliOhi){
+             return;
+         }
          jatkuu = !jatkuu;
          if(!jatkuu){
              message = "PRESS SPACE TO START, X TO RESTART";
@@ -217,6 +223,11 @@ public class Logiikka {
          return this.jatkuu;
      }
      
+     /**
+      * Päivittää uuden highscoren peliin mikäli parametrinä annettu
+      * pistemäärä on enemmän kuin nykyinen highscore
+      * @param pisteet 
+      */
      public void paivitaHighscore(int pisteet){
          if(pisteet > highscore){
              highscore = pisteet;
@@ -227,7 +238,12 @@ public class Logiikka {
          return highscore;
      }
      
-     public void reset(){
+     /**
+      * Palauttaa pelin alkutilanteen
+      * Vapaavalintaisesti resetoi myös scoren ja elämät
+      * @param resetScore 
+      */
+     public void reset(boolean resetScore){
          if(jatkuu){
              return;
          }
@@ -251,13 +267,21 @@ public class Logiikka {
         Piste pallonSijainti = new Piste(
                 leveys / 2,                                 // X - koordinaatti
                 korkeus - 2);                               // Y - koordinaatti
-        this.pallo = new Pallo(0,-0.1, 0.1, pallonSijainti);
+        this.pallo = new Pallo(0,-0.2, 0.1, pallonSijainti);
         
-        this.pisteet = 0;
+        if(resetScore){
+            this.pisteet = 0;
+            this.lives = 3;
+            peliOhi = false;
+        }
         
         jatkuu = true;
         aloitaLopeta();
         
+     }
+     
+     public int getLives(){
+         return this.lives;
      }
      
 }

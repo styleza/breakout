@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.ilri.breakout.controller;
 import com.ilri.breakout.domain.Logiikka;
 import com.ilri.breakout.gui.Piirtoalusta;
@@ -15,24 +9,26 @@ import javax.swing.Timer;
 
 /**
  * Pelin ohjain
+ * Vastaa pelilogiikan ja käyttöliittymän välisestä kommunikoinnista ja alustuksesta
+ * 
  * @author Ilari
  */
 public class Breakout extends Timer implements ActionListener {
     private Piirtoalusta piirtoalusta;
-    private Logiikka kartta;
+    private Logiikka logiikka;
 
     private boolean jatkuu;
     private int leveys, korkeus;
     
     /**
-     * Luo breakout peli
+     * Luo breakout pelin
      */
     public Breakout(){
         super(1000,null);
         
         this.leveys = 30;
         this.korkeus = 40;
-        this.kartta = new Logiikka(this.leveys,this.korkeus);
+        this.logiikka = new Logiikka(this.leveys,this.korkeus);
         
         
         addActionListener(this);
@@ -54,7 +50,7 @@ public class Breakout extends Timer implements ActionListener {
         if(!jatkuu){
             return;
         }
-        if(!this.kartta.toimi()){
+        if(!this.logiikka.toimi()){
            // jatkuu = false;
         }
         piirtoalusta.repaint();
@@ -71,7 +67,7 @@ public class Breakout extends Timer implements ActionListener {
     }
     
     public Logiikka getKartta(){
-        return this.kartta;
+        return this.logiikka;
     }
     
     public void setPiirtoalusta(Piirtoalusta piirtoalusta){

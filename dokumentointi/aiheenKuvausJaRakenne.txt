@@ -1,7 +1,12 @@
 Aihe: Breakout pelin klooni
 
+Peliss‰ on vain yksi k‰ytt‰j‰: pelaaja
+Peliss‰ on vain yksi toiminto: pelaa
+
 Toteutetaan peli, joka vastaa perustoiminnoltaan vanhaa perinteist‰ breakout peli‰.
 Peliss‰ on tarkoitus "aluslautaa" liikuttelemalla tuhota kaikki palikat peli-ikkunan yl‰laidasta.
 Eriv‰risist‰ palikoista saa eri verran pisteit‰.
 "Aluslautaa" liikutetaan nuolin‰pp‰imill‰ sivuille, pallo kimpoaa eri tavalla riippuen siit‰ mihin kohtaa lautaa pallo osuu.
 Pelin voi pausettaa painamalla space n‰pp‰int‰.
+Peliss‰ on kolme el‰m‰‰, jotka v‰henev‰t aina pallon tippuessa "alas".
+Peli yll‰pit‰‰ highscorea.

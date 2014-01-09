@@ -9,3 +9,4 @@ PVM	Tuntim‰‰r‰	Mit‰ tehty
 6.1     3               Viimeistelty/refaktoroitu pelilogiikkaa ja lis‰tty testej‰
 7.1	3		Kirjoitettu testej‰
 8.1     2               Paranneltu peli‰, korjattu testej‰, refkatoroitu koodia, tehty sekvenssikaaviot ja luokkakaavio uusiksi
+9.1	2		Lis‰tty el‰m‰t, kirjoitettu javadocceja, siivottu koodia
