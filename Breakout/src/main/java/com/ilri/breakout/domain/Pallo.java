@@ -121,10 +121,10 @@ public class Pallo implements Siirrettava, Sijaitseva{
      * Nopeuttaa peliä
      */
     public void nopeuta(){
-        if(suuntaX < 1.0){
+        if(Math.abs(suuntaX) < 1.5){
             this.suuntaX *= 1.1;
         }
-        if(suuntaY < 1.0){
+        if(Math.abs(suuntaY) < 1.5){
             this.suuntaY *= 1.1;
         }
     }

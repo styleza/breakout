@@ -112,9 +112,11 @@ public class PalloTest {
         pallo.nopeuta();
         assertEquals(1.089,pallo.getSuuntaX(),0.001);
         assertEquals(1.089,pallo.getSuuntaY(),0.001);
+        pallo.setSuuntaY(1.5);
+        pallo.setSuuntaX(1.5);
         pallo.nopeuta();
-        assertEquals(1.089,pallo.getSuuntaX(),0.001);
-        assertEquals(1.089,pallo.getSuuntaY(),0.001);
+        assertEquals(1.5,pallo.getSuuntaX(),0.001);
+        assertEquals(1.5,pallo.getSuuntaY(),0.001);
     }
     
     @Test
